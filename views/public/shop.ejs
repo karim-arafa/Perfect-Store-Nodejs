@@ -1,0 +1,59 @@
+<%- include('../partials/header.ejs') -%>
+
+    <br>
+    <div class="container">
+        <br>
+        <input class="form-control searchbox-input" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <div class="row" style="justify-content: center;" id="myDIV">
+            <% items.forEach((item)=>{ %>
+                <div class="card col-sm-12 col-md-3" style="padding: 5px; text-align: center; margin: 20px;">
+
+                    <div class="card-header">
+                        <%=item.name %>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/product.html">
+                            <input type="hidden" name="id" value="<%=item.products_id %>">
+                            <button class="hov btn">
+                <img style="width: 100%;"  src="images/uploads/<%=item.primary_image %>" alt="product 1">
+            </button>
+                        </form>
+                        <hr>
+                        <img style="width: 25px;" src="images/price.png" alt="">
+                        <span><b>price</b></span>
+                        <%=item.price %> $
+                            <hr>
+                            <img style="width: 25px;" src="images/quantity.png" alt="">
+                            <span><b>Quantity</b></span>
+                            <% if(item.quantity<=0){ %>
+                                <span> out of stock </span>
+                    </div>
+                    <div class="card-footer">
+                        <form action="/cart.html/add" method="post">
+                            <input type="hidden" name="itemID" value="<%=item.products_id %>">
+                            <input type="submit" class="btn btn-success btn-block" value="Add To Cart" disabled>
+                        </form>
+                    </div>
+                    <% } else {%>
+                        <span> <%=item.quantity %> </span>
+                </div>
+                <div class="card-footer">
+                    <form action="/cart.html/add" method="post">
+                        <input type="hidden" name="itemID" value="<%=item.products_id %>">
+                        <input type="submit" class="btn btn-success btn-block" value="Add To Cart">
+                    </form>
+                </div>
+                <% } %>
+
+
+
+
+        </div>
+        <% }) %>
+    </div>
+    </div>
+    <br>
+    <br>
+    <script src="script/viewproduct.js"></script>
+    <%- include( '../partials/footer.ejs') -%>

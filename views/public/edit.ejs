@@ -1,0 +1,62 @@
+<%- include('../partials/header.ejs') -%>
+
+    <br>
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                add product
+            </div>
+            <form action="edit.html" method="post" enctype="multipart/form-data">
+            <div class="card-body row">
+               
+                <div class="col-md-8 col-sm-12">
+                    <label style="display: block;">Name</label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Product name" required>
+                    <br>
+                    <label style="display: block;">Descreption</label>
+                    <textarea id="desc" name="desc" class="form-control " style="height: 200px;" placeholder="Write product Descreption "></textarea>
+                    <br>
+                    <div class="form-group">
+                        <label class=" control-label" for="filebutton" style="display: block;">Upload Images</label>
+                        <input id="filebutton" name="userPhoto" class="input-file" type="file" multiple>
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <label>Price</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="btnGroupAddon2">$</div>
+                        </div>
+                        <input id="price"  name = "price"type="text" class="form-control" placeholder="30" aria-label="Input group example" aria-describedby="btnGroupAddon2" required>
+                    </div>
+                    <br>
+                    <label for="birthdaytime" style="display: block;">Date</label>
+                    <input id="date" name="date" type="date" class="form-control" id="birthdaytime" >
+                    <br>
+                    <label style="display: block;" for="cars">Status</label>
+
+                    <select class="form-control " id="Status" name="state">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+
+                        </select>
+                    <br>
+                    <label style="display: block;">Quantity</label>
+                    <input id="Quantity" name="quantity" type="text" class="form-control" placeholder="1" required>
+                    <br>
+                    <input  class="btn btn-success  " type="submit" value="Update">
+                </div>
+                
+            </div>
+        </div>
+    </form>
+
+
+
+    </div>
+    <br>
+    <br>
+    <script src="/script/edit.js"></script>
+    <%- include( '../partials/footer.ejs') -%>

@@ -1,0 +1,128 @@
+<%- include('../partials/header.ejs') -%>
+
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/login.css">
+    <div class="signup-form">
+        <form>
+            <h2>Register</h2>
+            <%if(errormessage){ %>
+                <div style="color: red;">
+                    <%=errormessage %>
+                </div>
+                <% } %>
+                    <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Address" name="Address" placeholder="Address" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="camera">if you want to take a photo :</label>
+                        <button class="btn btn-primary btn-lg btn-block" onclick="toggleCameraDiv()">start / stop camera</button>
+                    </div>
+
+                    <div id="camera" class="form-group" style="display: none;">
+                        <div style="width: 100%;" id="container">
+                            <video style="width: 100%;" autoplay="false" id="videoElement"></video>
+                            <div class="btn btn-primary btn-lg btn-block" onclick="takeScreenShot()">ScreenShot</div><br>
+                            <canvas style="width: 100%;" id="showScreenShot"></canvas>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <div class="form-group">
+                        <div onclick="sendData()" class="btn btn-success btn-lg btn-block">Register</div>
+                    </div>
+                    <div class="text-center">Already have an account? <a href="/login.html">Sign in</a></div>
+        </form>
+
+    </div>
+    <script>
+        //startCamera();
+        function toggleCameraDiv() {
+            var x = document.getElementById("camera");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                startCamera();
+            } else {
+                x.style.display = "none";
+                vidOff();
+                stopCamera();
+
+            }
+        }
+
+        async function startCamera() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                let stream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: false
+                }, )
+                videoElement.srcObject = stream;
+            }
+        }
+
+        async function stopCamera() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                let stream = await navigator.mediaDevices.getUserMedia({
+                    video: false,
+                    audio: false
+                }, )
+                videoElement.srcObject = stream;
+            }
+        }
+
+        function vidOff() {
+            vid.pause();
+            vid.src = "";
+            localstream.stop();
+        }
+
+        function takeScreenShot() {
+            showScreenShot.width = videoElement.videoWidth;
+            showScreenShot.height = videoElement.videoHeight;
+            showScreenShot.getContext("2d").drawImage(videoElement, 0, 0);
+            //document.getElementById("takephoto").value = showScreenShot.toDataURL();
+        };
+
+        function sendData() {
+            var dataURL = showScreenShot.toDataURL();
+            $.ajax({
+                type: "POST",
+                url: "register.html",
+                data: {
+                    first_name: document.getElementById("first_name").value,
+                    last_name: document.getElementById("last_name").value,
+                    password: document.getElementById("password").value,
+                    confirm_password: document.getElementById("confirm_password").value,
+                    Address: document.getElementById("Address").value,
+                    email: document.getElementById("email").value,
+                    imgBase64: dataURL
+                }
+            }).done(function(response) {
+                console.log('saved: ' + response);
+                window.location.href = '/login.html'
+            });
+
+        }
+
+
+
+        //var dataURL = canvas.toDataURL();
+    </script>
+    <%- include( '../partials/footer.ejs') -%>

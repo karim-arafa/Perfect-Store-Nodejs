@@ -1,0 +1,72 @@
+<%- include('../partials/header.ejs') -%>
+
+<link rel="stylesheet" href="css/addproduct.css">
+<br>
+<br>
+<div class="container">
+    
+    <div class="form-row ">
+        
+        
+       
+        
+        <div class="form-group col-lg-2 col-sm-12">
+            <button onclick="newProduct()" type="button " class="btn btn-success btn-block ">Add New</button>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+              
+                <table class="table table-striped table-hover" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>						
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Quantity</th>
+                            <th>Edit</th>
+                            <th>delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% items.forEach((item)=>{ %>
+                        <tr>
+                            <td>1</td>
+                            <td><%=item.name %></td>
+                            <td><%=item.price %></td>                        
+                            <td><%=item.state %></td>
+                            <td ><%=item.date %></td>
+                            <td><%=item.quantity %></td>
+                        
+                    <td class="actions" data-th="">
+                        <form method="post" action="/edit_product.html">
+                        <input type="hidden" name="id" value="<%=item.products_id %>">
+                        <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                      </form>
+                      
+                    </td>
+                    <td class="actions" data-th="">
+                      <form method="post" action="/addproduct.html/delete">
+                        <input type="hidden" name="id" value="<%=item.products_id %>">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                      </form>
+                    </td>
+                        </tr>
+                        <% }) %>
+                        
+                    </tbody>
+                </table>
+             
+            </div>
+        </div>        
+    </div> 
+</div>
+<br>
+<br>
+    <script src="script/addproduct.js"></script>
+    <%- include( '../partials/footer.ejs') -%>

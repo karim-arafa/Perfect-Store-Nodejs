@@ -1,0 +1,87 @@
+<%- include('../partials/header.ejs') -%>
+<link rel="stylesheet" href="css/product.css">
+<br>
+<br>
+
+<!-- product -->
+<div class="product-content product-wrap clearfix product-deatil">
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <div class="container">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" >
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    </ol>
+                    
+                    <div class="carousel-inner">
+                        <% images.forEach((e)=> { %>
+                      <div class="carousel-item active">
+                        <img src="images/uploads/<%= e.image_url %>" class="d-block w-100" style=" height:300px;"alt="first">
+                      </div>
+                      <% }); %>
+                     
+                     
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+        
+                <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
+        <form action="/edit_product.html/update" method="post">    
+                
+            <h2 class="name">
+                <input type="text" name="name" value="<%=item.name %>">
+            </h2>
+            <hr />
+            <h3 class="price-container">
+                <input type="text" name="price" value="<%=item.price %>">
+                <b style="font-size:x-large;">$</b><small style="color: red;"> *includes tax</small>
+            </h3>
+            <div class="certified">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">Delivery time<span>7 Working Days</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">Certified<span>Quality Assured</span></a>
+                    </li>
+                </ul>
+            </div>
+           
+            
+                <div id="myTabContent" class="tab-content">
+                    
+                        <br />
+                        <strong>Description Title</strong>
+                        <p>
+                            <input type="text" name="desc" value="<%=item.desc %>">
+                        </p>
+                    </div>
+              
+           
+            <hr />
+           
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <input type="hidden" name="itemID" value="<%=item.products_id %>">
+                    <input type="submit" class="btn btn-success btn-lg" value="update">
+                </div>
+            </form>
+            
+        </div>
+   
+
+</div>
+</div>
+
+
+    <%- include( '../partials/footer.ejs') -%>

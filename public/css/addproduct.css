@@ -1,0 +1,6 @@
+table.table td a.edit {
+    color:  #18bc9c;
+}
+table.table td a.delete {
+    color: rgb(211, 58, 58);
+}

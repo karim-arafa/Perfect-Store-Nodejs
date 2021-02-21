@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs') -%>
+
+<link rel="stylesheet" href="css/manageorders.css">
+
+<br>
+<br>
+<div class="container">
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+              
+                <table class="table table-striped table-hover" id="morders">
+                    <thead>
+                        <tr>
+                            <th>Orders</th>						
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cart.forEach((e)=>{ %> 
+                        <tr>
+                            <td><%=e.cart_id %></td>
+                            <td><%=e.first_name %></td>                        
+                            <td><%=e.last_name %></td>
+                            <td><%=e.total %></td>
+                            <td>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <% if (e.state=="approved"){ %>
+                                            <button type="submit"  class="btn btn-secondary btn-block disabled" disabled>Approved</button> 
+                                            <% } else { %> 
+                                                <form method="post" action="/manageorders.html">
+                                                    <input type="hidden" name = "cart_id" value="<%=e.cart_id %>">
+                                                <input type="submit"  class="btn btn-primary btn-block " value="Approve">
+                                                 
+                                            </form>
+                                            <% } %>
+                                    </label>
+                                  </div>
+                                  
+                            </td>
+                        </tr>
+                        <% }) %>                        
+                    </tbody>
+                </table>
+             
+            </div>
+        </div>        
+    </div> 
+</div>
+<br>
+<br>
+    <%- include( '../partials/footer.ejs') -%>;

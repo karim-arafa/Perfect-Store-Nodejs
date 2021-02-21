@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
+    <div class="signup-form">
+        <form action="login.html" method="POST">
+            <h2>Login</h2>
+            <p class="hint-text">Sign in to your account</p>
+            <% if(errormessage ){ %>
+                <div class="error" style="color: red;">
+                    <%= errormessage %>
+
+                </div><br>
+                <% } %>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block">Sign in</button>
+                    </div>
+
+        </form>
+
+    </div>
+    <%- include( '../partials/footer.ejs') %>;
