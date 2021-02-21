@@ -97,7 +97,7 @@ port: XXXX,
 <b>Congratulations you are now ready to view the website using the browser!</b>
 
 
-#### <b>Running the game</b>
+#### <b>starting your website</b>
 1.Open yor cmd  anp run the following commands
 ```
 npm init -y
